@@ -1,0 +1,14 @@
+﻿<h2>Authentification</h2>
+
+<form method="post" action="/User/LoginForm">
+
+    <input type="text" name="Login" placeholder="Login" />
+    <input type="password" name="Password" placeholder="Password" />
+
+    <button type="submit">Se connecter</button>
+
+    @if (ViewBag.Error != null)
+    {
+        <p style="color:red">@ViewBag.Error</p>
+    }
+</form>

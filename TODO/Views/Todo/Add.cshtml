@@ -1,0 +1,39 @@
+﻿@model TodoVM
+@{
+    Layout = "_Layout";
+}
+
+<h2>Ajouter une Tâche</h2>
+
+<form method="post" class="mt-4">
+
+    <div class="mb-3">
+        <label class="form-label">Libelle</label>
+        <input asp-for="Libelle" class="form-control" />
+        <span asp-validation-for="Libelle" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">État</label>
+        <select asp-for="State" class="form-control">
+            <option value="ToDo">À faire</option>
+            <option value="Doing">En cours</option>
+            <option value="Done">Terminé</option>
+        </select>
+        <span asp-validation-for="State" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Date Limite</label>
+        <input asp-for="DateLimite" type="date" class="form-control" />
+        <span asp-validation-for="DateLimite" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+    <a href="/Todo/Index" class="btn btn-secondary">Annuler</a>
+</form>

@@ -1,0 +1,44 @@
+﻿@model List<TodoVM>
+@{
+    Layout = "_Layout";
+}
+
+<h2 class="mb-4">Liste des Tâches</h2>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Libelle</th>
+            <th>Description</th>
+            <th>État</th>
+            <th>Date Limite</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            var t = Model[i];
+            bool depasse = t.DateLimite < DateTime.Now;
+            bool done = t.State == "Done";
+
+            string classes = "";
+            if (done) classes = "text-decoration-line-through";
+            if (depasse && !done) classes += " text-danger";
+
+            <tr class="@classes">
+                <td>@t.Libelle</td>
+                <td>@t.Description</td>
+                <td>@t.State</td>
+                <td>@t.DateLimite.ToShortDateString()</td>
+                <td>
+                    <a class="btn btn-warning btn-sm" href="/Todo/Edit/@i">✏️ Modifier</a>
+                    <a class="btn btn-danger btn-sm" onclick="return confirm('Supprimer ?')" href="/Todo/Delete/@i">🗑 Supprimer</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-primary" href="/Todo/Add">➕ Ajouter</a>
